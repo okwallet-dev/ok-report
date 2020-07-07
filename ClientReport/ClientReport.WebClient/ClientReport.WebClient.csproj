@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ok-report\dist\**" />
+    <Compile Remove="ok-report\e2e\**" />
+    <Compile Remove="ok-report\node_modules\**" />
+    <Compile Remove="ok-wallet\e2e\**" />
+    <Compile Remove="ok-wallet\node_modules\**" />
+    <EmbeddedResource Remove="ok-report\dist\**" />
+    <EmbeddedResource Remove="ok-report\e2e\**" />
+    <EmbeddedResource Remove="ok-report\node_modules\**" />
+    <EmbeddedResource Remove="ok-wallet\e2e\**" />
+    <EmbeddedResource Remove="ok-wallet\node_modules\**" />
+    <None Remove="ok-report\dist\**" />
+    <None Remove="ok-report\e2e\**" />
+    <None Remove="ok-report\node_modules\**" />
+    <None Remove="ok-wallet\e2e\**" />
+    <None Remove="ok-wallet\node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ok-report\src\app\component\" />
+  </ItemGroup>
+
+</Project>
