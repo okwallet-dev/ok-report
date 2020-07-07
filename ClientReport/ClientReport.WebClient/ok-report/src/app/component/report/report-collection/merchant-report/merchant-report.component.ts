@@ -64,8 +64,7 @@ export class MerchantReportComponent implements OnInit {
 
   generateReport() {
     if (this.getReportParam()) {
-      this.isLoading = true;
-      //console.log(this.reportObject);
+      this.isLoading = true;    
       this.reportUtilityService.generateReport(this.setting.reportApiServer + '/Report/ClientReport', this.reportObject).pipe(first())
         .subscribe(
           data => {
