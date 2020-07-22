@@ -89,7 +89,7 @@ namespace ClientReport.SecurityApiServer.Controllers
 
 				List<Claim> jwtClaims = new List<Claim>();
 
-				jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Sub, authModel.User.Username.ToString()));
+				jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Sub, authModel.User.MobileNo.ToString()));
 				jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
 
 				jwtClaims.Add(new Claim("IsAuthenticated", authModel.IsAuthenticated.ToString().ToLower()));

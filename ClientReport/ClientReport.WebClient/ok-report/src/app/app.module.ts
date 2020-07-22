@@ -4,6 +4,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { AlertComponent } from './shared/_components';
+import { ErrorComponent } from './shared/_components/error/error.component';
+import { UppercaseDirective } from './shared/directives/uppercase.directive';
+import { AuthorizeButtonComponent } from './shared/directives/authorize-button/authorize-button.component';
+import { GenericFormActionComponent } from './shared/directives/generic-form-action/generic-form-action.component';
+import { GenericGridComponent } from './shared/directives/generic-grid/generic-grid.component';
+import { GenericStepperFormActionComponent } from './shared/directives/generic-stepper-form-action/generic-stepper-form-action.component';
+import { MfsDatepickerComponent } from './shared/directives/mfs-datepicker/mfs-datepicker.component';
+import { BdtCurrencyPipe } from './shared/filter-pipes/bdt-currency.pipe';
+import { ClientCategoryPipe } from './shared/filter-pipes/client-category.pipe';
+import { GenderCheckPipe } from './shared/filter-pipes/gender-check.pipe';
+import { ReportTypePipe } from './shared/filter-pipes/report-type.pipe';
+import { SecuredDataPipe } from './shared/filter-pipes/secured-data.pipe';
+import { StatusCheckPipe } from './shared/filter-pipes/status-check.pipe';
+import { YesNoPipe } from './shared/filter-pipes/yes-no.pipe';
+
 
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
@@ -79,7 +95,22 @@ import { LoaderComponent } from './shared/directives/loader/loader.component';
     MerchantReportComponent,
     GenericModalComponent,
     MfsPdfViewerComponent,
-    LoaderComponent
+    LoaderComponent,
+    AlertComponent,
+    ErrorComponent,
+    UppercaseDirective,
+    AuthorizeButtonComponent,
+    GenericFormActionComponent,
+    GenericGridComponent,
+    GenericStepperFormActionComponent,
+    MfsDatepickerComponent,
+    BdtCurrencyPipe,
+    ClientCategoryPipe,
+    GenderCheckPipe,
+    ReportTypePipe,
+    SecuredDataPipe,
+    StatusCheckPipe,
+    YesNoPipe
   ],
   imports: [
     BrowserModule,

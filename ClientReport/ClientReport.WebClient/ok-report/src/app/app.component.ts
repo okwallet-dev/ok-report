@@ -84,7 +84,7 @@ export class AppComponent implements OnInit {
         label: 'Report',
         icon: 'fas fa-file-archive',
         items: [
-          { label: 'Transaction Report', icon: 'fa fa-file', routerLink:'app-merchant-report' }        
+          { label: 'Transaction Report', icon: 'fa fa-file', routerLink: 'app-merchant-report' }        
         ]
       }        
     ];
@@ -121,6 +121,7 @@ export class AppComponent implements OnInit {
           }
         },
         error => {
+          console.log(error);
           this.messageService.add({ severity: 'error', summary: 'Warning', detail: this.currentUser.user.name + ' password change unsuccessful' });
         });
   }

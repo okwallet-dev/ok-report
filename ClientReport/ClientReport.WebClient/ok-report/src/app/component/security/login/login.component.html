@@ -27,8 +27,10 @@
         </div>
         <div class="p-col-12">
           <span class="ui-float-label">
-            <input id="float-input" type="text" class="form-control" pInputText [(ngModel)]="loginModel.UserName" [disabled]="fixedUserName || lockDownState">
-            <label for="float-input">User Name</label>
+            <p-inputMask type="text" mask="99999999999" [style]="{'width':'100%'}" [(ngModel)]="loginModel.UserName" 
+                         placeholder="01xxxxxxxxx" id="float-input" pKeyFilter="int"></p-inputMask>
+            <!--<input id="float-input" type="text" class="form-control" pInputText [(ngModel)]="loginModel.UserName" pKeyFilter="int">-->
+            <label for="float-input">User Account</label>
           </span>
         </div>
         <div class="p-col-12">

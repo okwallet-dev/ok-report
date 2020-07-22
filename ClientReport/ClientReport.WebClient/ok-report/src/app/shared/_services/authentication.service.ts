@@ -42,12 +42,12 @@ export class AuthenticationService {
         return model;
       }));
   }
-  getDataForDashboard() {
-    return this.http.get(this.setting.clientApiServer + '/Dashboard/GetDataForDashboard')
-      .pipe(map(response => {
-        return response;
-      }));
-  }
+  //getDataForDashboard() {
+  //  return this.http.get(this.setting.clientApiServer + '/Dashboard/GetDataForDashboard')
+  //    .pipe(map(response => {
+  //      return response;
+  //    }));
+  //}
 
   logout() {
     // remove user from local storage to log user out

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AlertService, AuthenticationService } from '../../../shared/_services';
+import { MfsUtilityService } from '../../../services/mfs-utility.service';
 
 @Component({
   selector: 'app-login',
@@ -24,16 +25,19 @@ export class LoginComponent implements OnInit {
   fixedUserName: boolean = false;
   lockDownState: boolean = false;
   forceLocklockDownState: boolean = false;
+  mobileNoRegEx: RegExp;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
+    private mfsUtilityService: MfsUtilityService,
     private elementRef: ElementRef) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }
-
+    this.mobileNoRegEx = this.mfsUtilityService.getMobileNoRegExp();
   }
 
   ngOnInit() {

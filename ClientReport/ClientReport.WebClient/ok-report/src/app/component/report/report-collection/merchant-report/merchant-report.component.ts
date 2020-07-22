@@ -25,7 +25,7 @@ export class MerchantReportComponent implements OnInit {
   reportObject: any;
   fileOptionList: any;
   model: any;
-
+  typeList: any;
   constructor(private authenticationService: AuthenticationService,
     private reportUtilityService: ReportUtilityService,
     private mfsUtilityService: MfsUtilityService,
@@ -33,8 +33,8 @@ export class MerchantReportComponent implements OnInit {
     private route: ActivatedRoute,
     private setting: MfsSettingService,
     private messageService: MessageService) {
-    this.authenticationService.currentUser.subscribe(x => {
-      this.currentUserModel = x;
+    this.authenticationService.currentUser.subscribe(x => {    
+      this.currentUserModel = x;        
     });
 
     this.pdf = {};
@@ -42,10 +42,15 @@ export class MerchantReportComponent implements OnInit {
     this.model = {};
     this.reportObject.fileType = 'PDF';
     this.fileOptionList = reportUtilityService.getFileExtensionList();
+    this.model.mphone = this.currentUserModel.user.mobileNo;
   }
 
 
   ngOnInit() {
+    this.typeList = [
+      { label: 'Transaction Report', value: 'TR' },
+      { label: 'Summary Report', value: 'SM' }    
+    ];
   }
   getReportParam() {
     if (this.validate()) {
@@ -53,6 +58,7 @@ export class MerchantReportComponent implements OnInit {
       obj.fromDate = this.mfsUtilityService.renderDate(this.model.fromDate, true);
       obj.toDate = this.mfsUtilityService.renderDate(this.model.toDate, true);
       obj.mphone = this.model.mphone;
+      //obj.selectedReportType = this.model.selectedReportType;
       this.reportObject.reportOption = JSON.stringify(obj);
       return true;
     }
@@ -63,33 +69,58 @@ export class MerchantReportComponent implements OnInit {
   }
 
   generateReport() {
-    if (this.getReportParam()) {
-      this.isLoading = true;    
-      this.reportUtilityService.generateReport(this.setting.reportApiServer + '/Report/ClientReport', this.reportObject).pipe(first())
-        .subscribe(
-          data => {
-            if (data !== 'NOTM') {
-              this.pdf.source = data;
-              this.pdf.ext = this.reportObject.fileType;
-              this.pdf.fileName = 'Account Statement';
-              this.isLoading = false;
-              this.pdfViewer.refreshReport();
-            }
-            else {
-              this.isLoading = false;
-              this.messageService.add({ severity: 'error', summary: 'Warning', detail: 'Put a merchant account' });
-            }
+    if (this.model.selectedReportType === 'SM') {
+      if (this.getReportParam()) {
+        this.isLoading = true;
+        this.reportUtilityService.generateReport(this.setting.reportApiServer + '/Report/MerchantTransactionSummaryReport', this.reportObject).pipe(first())
+          .subscribe(
+            data => {
+              if (data !== 'NOTM') {
+                this.pdf.source = data;
+                this.pdf.ext = this.reportObject.fileType;
+                this.pdf.fileName = 'Account Statement';
+                this.isLoading = false;
+                this.pdfViewer.refreshReport();
+              }
+              else {
+                this.isLoading = false;
+                this.messageService.add({ severity: 'error', summary: 'Warning', detail: 'Put a merchant account' });
+              }
 
-          },
-          error => {
-            this.isLoading = false;
-          });
+            },
+            error => {
+              this.isLoading = false;
+            });
+      }
     }
+    else {
+      if (this.getReportParam()) {
+        this.isLoading = true;
+        this.reportUtilityService.generateReport(this.setting.reportApiServer + '/Report/MerchantTransactionReport', this.reportObject).pipe(first())
+          .subscribe(
+            data => {
+              if (data !== 'NOTM') {
+                this.pdf.source = data;
+                this.pdf.ext = this.reportObject.fileType;
+                this.pdf.fileName = 'Account Statement';
+                this.isLoading = false;
+                this.pdfViewer.refreshReport();
+              }
+              else {
+                this.isLoading = false;
+                this.messageService.add({ severity: 'error', summary: 'Warning', detail: 'Put a merchant account' });
+              }
 
+            },
+            error => {
+              this.isLoading = false;
+            });
+      }
+    }
   }
 
   validate(): any {
-    if (!this.model.fromDate || !this.model.toDate || !this.model.mphone) {
+    if (!this.model.fromDate || !this.model.toDate || !this.model.mphone || !this.model.selectedReportType) {
       return false;
     }
     else {

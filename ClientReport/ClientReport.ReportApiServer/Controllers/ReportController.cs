@@ -20,8 +20,8 @@ namespace ClientReport.ReportApiServer.Controllers
 	public class ReportController : ControllerBase
 	{
 		[HttpPost]
-		[Route("ClientReport")]
-		public async Task<object> ClientReport(ReportModel reportModel)
+		[Route("MerchantTransactionReport")]
+		public async Task<object> MerchantTransactionReport(ReportModel reportModel)
 		{
 			try
 			{
@@ -29,7 +29,32 @@ namespace ClientReport.ReportApiServer.Controllers
 				{
 					ApiInfo apiInfo = new ApiInfo();
 					dynamic apiResponse = null;
-					using (var response = await httpClient.PostAsJsonAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/Transaction/GenerateAccountStatementForClient", reportModel))
+					using (var response = await httpClient.PostAsJsonAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/Transaction/MerchantTransactionReport", reportModel))
+					{
+						apiResponse = await response.Content.ReadAsAsync<dynamic>();
+
+					}
+					return apiResponse;
+				}
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(StatusCodes.Status401Unauthorized);
+			}
+
+		}
+
+		[HttpPost]
+		[Route("MerchantTransactionSummaryReport")]
+		public async Task<object> MerchantTransactionSummaryReport(ReportModel reportModel)
+		{
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					ApiInfo apiInfo = new ApiInfo();
+					dynamic apiResponse = null;
+					using (var response = await httpClient.PostAsJsonAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/Transaction/MerchantTransactionSummaryReport", reportModel))
 					{
 						apiResponse = await response.Content.ReadAsAsync<dynamic>();
 
