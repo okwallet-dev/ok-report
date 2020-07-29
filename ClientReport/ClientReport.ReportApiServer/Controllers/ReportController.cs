@@ -68,10 +68,52 @@ namespace ClientReport.ReportApiServer.Controllers
 			}
 
 		}
-		//[HttpGet]
-		//public ActionResult<IEnumerable<string>> Get()
-		//{
-		//	return new string[] { "value1", "value2" };
-		//}
+		[HttpPost]
+		[Route("OutletDetailsTransReport")]
+		public async Task<object> OutletDetailsTransReport(ReportModel reportModel)
+		{
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					ApiInfo apiInfo = new ApiInfo();
+					dynamic apiResponse = null;
+					using (var response = await httpClient.PostAsJsonAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/ChildMerchant/OutletDetailsTransReport", reportModel))
+					{
+						apiResponse = await response.Content.ReadAsAsync<dynamic>();
+
+					}
+					return apiResponse;
+				}
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(StatusCodes.Status401Unauthorized);
+			}
+		}
+
+		[HttpPost]
+		[Route("OutletSumTransReportByTranDate")]
+		public async Task<object> OutletSumTransReportByTranDate(ReportModel reportModel)
+		{
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					ApiInfo apiInfo = new ApiInfo();
+					dynamic apiResponse = null;
+					using (var response = await httpClient.PostAsJsonAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/ChildMerchant/OutletSumTransReportByTranDate", reportModel))
+					{
+						apiResponse = await response.Content.ReadAsAsync<dynamic>();
+
+					}
+					return apiResponse;
+				}
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(StatusCodes.Status401Unauthorized);
+			}
+		}
 	}
 }

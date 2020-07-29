@@ -83,6 +83,8 @@ import { GenericModalComponent } from './shared/directives/generic-modal/generic
 import { JwtInterceptor, ErrorInterceptor } from './shared/_helpers';
 import { MfsPdfViewerComponent } from './shared/directives/mfs-pdf-viewer/mfs-pdf-viewer.component';
 import { LoaderComponent } from './shared/directives/loader/loader.component';
+import { ChidMerchantComponent } from './component/report/report-collection/chid-merchant/chid-merchant.component';
+import { ChainMerchantComponent } from './component/report/report-collection/chain-merchant/chain-merchant.component';
 
 
 @NgModule({
@@ -110,7 +112,9 @@ import { LoaderComponent } from './shared/directives/loader/loader.component';
     ReportTypePipe,
     SecuredDataPipe,
     StatusCheckPipe,
-    YesNoPipe
+    YesNoPipe,
+    ChidMerchantComponent,
+    ChainMerchantComponent
   ],
   imports: [
     BrowserModule,

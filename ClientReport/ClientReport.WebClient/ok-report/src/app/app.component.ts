@@ -84,7 +84,8 @@ export class AppComponent implements OnInit {
         label: 'Report',
         icon: 'fas fa-file-archive',
         items: [
-          { label: 'Transaction Report', icon: 'fa fa-file', routerLink: 'app-merchant-report' }        
+          { label: 'Transaction Report', icon: 'fa fa-file', routerLink: 'app-merchant-report' }, 
+          { label: 'Child Merchant Report', icon: 'fa fa-file', routerLink: 'app-chid-merchant' }
         ]
       }        
     ];
