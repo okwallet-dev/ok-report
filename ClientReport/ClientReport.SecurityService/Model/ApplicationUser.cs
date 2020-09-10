@@ -29,5 +29,6 @@ namespace ClientReport.SecurityService.Model
 		public bool Is_validated { get; set; }
 		public string Role_Name { get; set; }
 		public string LogInStatus { get; set; }
+		public string Mtype { get; set; }
 	}
 }

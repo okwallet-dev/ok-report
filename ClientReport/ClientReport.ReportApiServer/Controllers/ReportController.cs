@@ -115,5 +115,99 @@ namespace ClientReport.ReportApiServer.Controllers
 				return StatusCode(StatusCodes.Status401Unauthorized);
 			}
 		}
+
+		[HttpPost]
+		[Route("OutletSumTransReportByOutlet")]
+		public async Task<object> OutletSumTransReportByOutlet(ReportModel reportModel)
+		{
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					ApiInfo apiInfo = new ApiInfo();
+					dynamic apiResponse = null;
+					using (var response = await httpClient.PostAsJsonAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/ChildMerchant/OutletSumTransReportByOutlet", reportModel))
+					{
+						apiResponse = await response.Content.ReadAsAsync<dynamic>();
+
+					}
+					return apiResponse;
+				}
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(StatusCodes.Status401Unauthorized);
+			}
+		}
+		[HttpPost]
+		[Route("ChainMerchantReport")]
+		public async Task<object> ChainMerchantReport(ReportModel reportModel)
+		{
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					ApiInfo apiInfo = new ApiInfo();
+					dynamic apiResponse = null;
+					using (var response = await httpClient.PostAsJsonAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/ChainMerchant/ChainMerchantReport", reportModel))
+					{
+						apiResponse = await response.Content.ReadAsAsync<dynamic>();
+
+					}
+					return apiResponse;
+				}
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(StatusCodes.Status401Unauthorized);
+			}
+		}
+		[HttpPost]
+		[Route("GetMerchantInfo")]
+		public async Task<object> GetMerchantInfo(string mphone)
+		{
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					ApiInfo apiInfo = new ApiInfo();
+					dynamic apiResponse = null;
+					using (var response = await httpClient.PostAsJsonAsync(apiInfo.Ip + apiInfo.DistributorApiServer + "/Merchant/GetMerChantByMphone?mPhone=", mphone))
+					{
+						apiResponse = await response.Content.ReadAsAsync<dynamic>();
+
+					}
+					return apiResponse;
+				}
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(StatusCodes.Status401Unauthorized);
+			}
+		}
+
+		[HttpPost]
+		[Route("ChildMerDailySumReport")]
+		public async Task<object> ChildMerDailySumReport(ReportModel reportModel)
+		{
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					ApiInfo apiInfo = new ApiInfo();
+					dynamic apiResponse = null;
+					using (var response = await httpClient.PostAsJsonAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/ChildMerchant/DailySumReport", reportModel))
+					{
+						apiResponse = await response.Content.ReadAsAsync<dynamic>();
+
+					}
+					return apiResponse;
+				}
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(StatusCodes.Status401Unauthorized);
+			}
+		}
 	}
 }

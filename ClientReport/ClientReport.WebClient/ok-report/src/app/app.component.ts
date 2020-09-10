@@ -79,16 +79,41 @@ export class AppComponent implements OnInit {
   }
   ngOnInit() {
     this.changePasswordModel = {};
-    this.leftMenuItems = [  
-      {
-        label: 'Report',
-        icon: 'fas fa-file-archive',
-        items: [
-          { label: 'Transaction Report', icon: 'fa fa-file', routerLink: 'app-merchant-report' }, 
-          { label: 'Child Merchant Report', icon: 'fa fa-file', routerLink: 'app-chid-merchant' }
-        ]
-      }        
-    ];
+    if (this.currentUser.user.mtype === 'I') {
+      this.leftMenuItems = [
+        {
+          label: 'Report',
+          icon: 'fas fa-file-archive',
+          items: [
+            { label: 'Transaction Report', icon: 'fa fa-file', routerLink: 'app-merchant-report' }
+          ]
+        }
+      ];
+    }
+    else if (this.currentUser.user.mtype === 'CP') {
+      this.leftMenuItems = [
+        {
+          label: 'Report',
+          icon: 'fas fa-file-archive',
+          items: [
+            { label: 'Chain Merchant Report', icon: 'fa fa-file', routerLink: 'app-chain-merchant' }
+          ]
+        }
+      ];
+    }
+    else {
+      this.leftMenuItems = [
+        {
+          label: 'Report',
+          icon: 'fas fa-file-archive',
+          items: [
+            { label: 'Child Merchant Report', icon: 'fa fa-file', routerLink: 'app-chid-merchant' }
+          ]
+        }
+      ];
+
+    }
+
   }
   logout() {
     this.leftMenuItems = [];

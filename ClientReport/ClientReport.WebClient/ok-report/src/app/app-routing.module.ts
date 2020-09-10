@@ -6,6 +6,7 @@ import { ReportDetailsComponent } from './component/report/report-details/report
 import { AuthGuard } from './shared/_guards';
 import { MerchantReportComponent } from './component/report/report-collection/merchant-report/merchant-report.component';
 import { ChidMerchantComponent } from './component/report/report-collection/chid-merchant/chid-merchant.component';
+import { ChainMerchantComponent } from './component/report/report-collection/chain-merchant/chain-merchant.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]  },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'report-details', component: ReportDetailsComponent },
   { path: 'app-merchant-report', component: MerchantReportComponent, canActivate: [AuthGuard] },
   { path: 'app-chid-merchant', component: ChidMerchantComponent, canActivate: [AuthGuard] },
+  { path: 'app-chain-merchant', component: ChainMerchantComponent, canActivate: [AuthGuard] },
   {
     path: "",
     pathMatch: "full",

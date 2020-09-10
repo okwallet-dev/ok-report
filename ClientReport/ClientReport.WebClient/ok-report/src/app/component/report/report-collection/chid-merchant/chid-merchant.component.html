@@ -6,44 +6,50 @@
   <div class="p-grid">
     <div class="p-col-12">
       <div class="p-grid">
-        <div class="p-col-3">
+        <!--<div class="p-col-3">
           <br />
           <span class="ui-float-label ">
-            <input autocomplete="off" type="text" class="form-control form-input" [(ngModel)]="model.formSerial" pInputText [pKeyFilter]="positveNumber" />
+            <input autocomplete="off" type="text" class="form-control form-input" pInputText />
             <label for="float-input input-lg" class="col-form-label">Merchant Type</label>
           </span>
         </div>
         <div class="p-col-3">
           <br />
           <span class="ui-float-label ">
-            <input autocomplete="off" type="text" class="form-control form-input" [(ngModel)]="model.formSerial" pInputText [pKeyFilter]="positveNumber" />
+            <input autocomplete="off" type="text" class="form-control form-input" pInputText />
             <label for="float-input input-lg" class="col-form-label">Merchant Parent</label>
           </span>
         </div>
         <div class="p-col-3">
           <br />
           <span class="ui-float-label ">
-            <input autocomplete="off" type="text" class="form-control form-input" [(ngModel)]="model.formSerial" pInputText [pKeyFilter]="positveNumber" />
+            <input autocomplete="off" type="text" class="form-control form-input" pInputText />
             <label for="float-input input-lg" class="col-form-label">Outlet A/C No</label>
           </span>
         </div>
         <div class="p-col-3">
           <br />
           <span class="ui-float-label ">
-            <input autocomplete="off" type="text" class="form-control form-input" [(ngModel)]="model.formSerial" pInputText [pKeyFilter]="positveNumber" />
+            <input autocomplete="off" type="text" class="form-control form-input" pInputText />
             <label for="float-input input-lg" class="col-form-label">Outlet Code</label>
           </span>
-        </div>
+        </div>-->
 
-        <div class="p-col-6">
+        <div class="p-col-4">
           <label class="col-form-label">Report Type </label>
-          <p-dropdown [options]="typeList" placeholder="Select Type" [(ngModel)]="model.selectedReportType"
-                      [filter]="true" filterBy="label,value.name"
+          <p-dropdown [options]="typeList" placeholder="Select View Type" [(ngModel)]="model.selectedReportType"
+                      [filter]="true" filterBy="label,value.name" (onChange)="onSelectReportType()"
                       [style]="{display: 'grid'}" id="float-input"></p-dropdown>
         </div>
-        <div class="p-col-6">
+        <div class="p-col-4">
+          <label class="col-form-label">Report View Type </label>
+          <p-dropdown [options]="reportTypeList" placeholder="Select View Type" [(ngModel)]="model.selectedReportTypeOption"
+                      [filter]="true" filterBy="label,value.name" [disabled]="isReportTypeView"
+                      [style]="{display: 'grid'}" id="float-input"></p-dropdown>
+        </div>
+        <div class="p-col-4">
           <label class="col-form-label">Report Type </label>
-          <p-dropdown [options]="summaryTypeList" placeholder="Select Type" [(ngModel)]="model.selectedReportTypeOption"
+          <p-dropdown [options]="dateTypeList" placeholder="Select Date Type" [(ngModel)]="model.selectedDateType"
                       [filter]="true" filterBy="label,value.name"
                       [style]="{display: 'grid'}" id="float-input"></p-dropdown>
         </div>

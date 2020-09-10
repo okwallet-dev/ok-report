@@ -24,7 +24,10 @@ export class ChidMerchantComponent implements OnInit {
   fileOptionList: any;
   model: any;
   typeList: any;
-  summaryTypeList: any;
+  reportTypeList: any;
+  dateTypeList: any;
+  isReportTypeView: boolean = true;
+  regInfoModel: any = {};
   constructor(private authenticationService: AuthenticationService,
     private reportUtilityService: ReportUtilityService,
     private mfsUtilityService: MfsUtilityService,
@@ -46,17 +49,38 @@ export class ChidMerchantComponent implements OnInit {
 
 
   ngOnInit() {
+    //this.getMerchantInfo();
     this.typeList = [
       { label: 'Outlet Details Transaction Report', value: 'ODTR' },
       { label: 'Outlet Summary Transaction Report', value: 'OSTR' },
       //{ label: 'Outlet To Parent Transaction Report', value: 'OTPTR' },
       { label: 'Daily Summary  Report', value: 'DSR' }
     ];
-    this.summaryTypeList = [
+    this.reportTypeList = [
       { label: 'Transaction Date', value: 'TD' },
       { label: 'Outlet', value: 'O' }
     ];
-    console.log("Child mer");
+    this.dateTypeList = [
+      { label: 'Transaction Date', value: 'TD' },
+      { label: 'EOD Date', value: 'EOD' }
+    ];
+  }
+  getMerchantInfo() {
+    this.reportUtilityService.generateReport(this.setting.reportApiServer + '/Report/getMerchantInfo', this.model.mphone).pipe(first())
+      .subscribe(
+        data => {
+          if (data) {
+           
+          }
+          else {
+            this.isLoading = false;
+            this.messageService.add({ severity: 'error', summary: 'Warning', detail: 'Put a merchant account' });
+          }
+
+        },
+        error => {
+          this.isLoading = false;
+        });
   }
   getReportParam() {
     if (this.validate()) {
@@ -65,6 +89,9 @@ export class ChidMerchantComponent implements OnInit {
       obj.toDate = this.mfsUtilityService.renderDate(this.model.toDate, true);
       obj.mphone = this.model.mphone;
       //obj.selectedReportType = this.model.selectedReportType;
+      //obj.reportType = this.model.selectedReportType;
+      //obj.reportViewType = this.model.selectedReportTypeOption;
+      obj.dateType = this.model.selectedDateType;
       this.reportObject.reportOption = JSON.stringify(obj);
       return true;
     }
@@ -73,7 +100,15 @@ export class ChidMerchantComponent implements OnInit {
       obj.isNotValidated = true;
     }
   }
-
+  onSelectReportType() {
+    if (this.model.selectedReportType === 'OSTR') {
+      this.isReportTypeView = false;
+    }
+    else {
+      this.isReportTypeView = true;
+      this.model.selectedReportTypeOption = null;
+    }
+  }
   generateReport() {
     if (this.getReportParam()) {
       if (this.model.selectedReportType === 'ODTR') {
@@ -120,6 +155,51 @@ export class ChidMerchantComponent implements OnInit {
               this.isLoading = false;
             });
       }
+      if (this.model.selectedReportType === 'OSTR' && this.model.selectedReportTypeOption === 'O') {
+        this.isLoading = true;
+        this.reportUtilityService.generateReport(this.setting.reportApiServer + '/Report/OutletSumTransReportByOutlet', this.reportObject).pipe(first())
+          .subscribe(
+            data => {
+              if (data !== 'NOTM') {
+                this.pdf.source = data;
+                this.pdf.ext = this.reportObject.fileType;
+                this.pdf.fileName = 'Account Statement';
+                this.isLoading = false;
+                this.pdfViewer.refreshReport();
+              }
+              else {
+                this.isLoading = false;
+                this.messageService.add({ severity: 'error', summary: 'Warning', detail: 'Put a merchant account' });
+              }
+
+            },
+            error => {
+              this.isLoading = false;
+            });
+      }
+      if (this.model.selectedReportType === 'DSR') {
+        this.isLoading = true;
+        this.reportUtilityService.generateReport(this.setting.reportApiServer + '/Report/ChildMerDailySumReport', this.reportObject).pipe(first())
+          .subscribe(
+            data => {
+              if (data !== 'NOTM') {
+                this.pdf.source = data;
+                this.pdf.ext = this.reportObject.fileType;
+                this.pdf.fileName = 'Account Statement';
+                this.isLoading = false;
+                this.pdfViewer.refreshReport();
+              }
+              else {
+                this.isLoading = false;
+                this.messageService.add({ severity: 'error', summary: 'Warning', detail: 'Put a merchant account' });
+              }
+
+            },
+            error => {
+              this.isLoading = false;
+            });
+      }
+
     }
   }
 
