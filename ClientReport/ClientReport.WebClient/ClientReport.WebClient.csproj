@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ok-report\.gitignore" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ok-report\src\app\component\" />
   </ItemGroup>
 
