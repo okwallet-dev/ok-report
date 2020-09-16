@@ -12,8 +12,8 @@ export class ReportServiceService {
    
   constructor(private http: HttpClient, private settings: MfsSettingService) { }
 
-  getMerchantKycInfoByMphone(mobileNo: any) {
-    return this.http.post<any>(this.settings.reportApiServer + '/Kyc/getMerchantKycInfoByMphone?mphone=', mobileNo)
+  getMerchantKycInfoByMphone(mobileNo : string) {
+    return this.http.get<any>(this.settings.reportApiServer + '/Kyc/getMerchantKycInfoByMphone?mphone='+mobileNo)
       .pipe(map(data => {
         return data;
       }));

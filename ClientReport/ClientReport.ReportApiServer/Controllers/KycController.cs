@@ -16,7 +16,7 @@ namespace ClientReport.ReportApiServer.Controllers
 	[ApiController]	
     public class KycController : ControllerBase
     {
-		[HttpPost]
+		[HttpGet]
 		[Route("GetMerchantKycInfoByMphone")]
 		public async Task<object> GetMerchantKycInfoByMphone(string mphone)
 		{
@@ -26,7 +26,7 @@ namespace ClientReport.ReportApiServer.Controllers
 				{
 					ApiInfo apiInfo = new ApiInfo();
 					dynamic apiResponse = null;
-					using (var response = await httpClient.PostAsJsonAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/Kyc/GetMerchantKycInfoByMphone?mPhone=", mphone))
+					using (var response = await httpClient.GetAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/Kyc/GetMerchantKycInfoByMphone?mphone="+ mphone))
 					{
 						apiResponse = await response.Content.ReadAsAsync<dynamic>();
 
