@@ -26,6 +26,7 @@ export class ChainMerchantComponent implements OnInit {
   typeList: any;
   reportTypeList: any;
   dateTypeList: any;
+  isReportTypeView: boolean = true;
   constructor(private authenticationService: AuthenticationService,
     private reportUtilityService: ReportUtilityService,
     private mfsUtilityService: MfsUtilityService,
@@ -50,12 +51,12 @@ export class ChainMerchantComponent implements OnInit {
     this.typeList = [
       { label: 'Outlet Details Transaction Report', value: 'ODTR' },
       { label: 'Outlet Summary Transaction Report', value: 'OSTR' },
-      { label: 'Outlet To Parent Transaction Report', value: 'OTPTR' },
+      { label: 'Outlet To Parent Transaction Report', value: 'OTPTR' }, 
       { label: 'Daily Summary  Report', value: 'DSR' }
     ];
     this.reportTypeList = [
       { label: 'Transaction Date', value: 'TD' },
-      { label: 'Outlet', value: 'O' }
+      { label: 'Outlet', value: 'O' }  
     ];
     this.dateTypeList = [
       { label: 'Transaction Date', value: 'TD' },
@@ -63,7 +64,13 @@ export class ChainMerchantComponent implements OnInit {
     ];
   }
   onSelectReportType() {
-
+    if (this.model.selectedReportType === 'OSTR' || this.model.selectedReportType === 'OTPTR') {
+      this.isReportTypeView = false;
+    }
+    else {
+      this.isReportTypeView = true;
+      this.model.selectedReportTypeOption = null;
+    }
   }
   getReportParam() {
     if (this.validate()) {

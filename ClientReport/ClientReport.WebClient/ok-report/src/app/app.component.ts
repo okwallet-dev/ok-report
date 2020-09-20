@@ -101,7 +101,7 @@ export class AppComponent implements OnInit {
         }
       ];
     }
-    else {
+    else if (this.currentUser.user.mtype === 'CM') {
       this.leftMenuItems = [
         {
           label: 'Report',

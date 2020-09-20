@@ -44,7 +44,7 @@
         <div class="p-col-4">
           <label class="col-form-label">Report View Type </label>
           <p-dropdown [options]="reportTypeList" placeholder="Select View Type" [(ngModel)]="model.selectedReportTypeOption"
-                      [filter]="true" filterBy="label,value.name"
+                      [filter]="true" filterBy="label,value.name" [disabled]="isReportTypeView"
                       [style]="{display: 'grid'}" id="float-input"></p-dropdown>
         </div>
         <div class="p-col-4">
