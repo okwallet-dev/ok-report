@@ -39,5 +39,51 @@ namespace ClientReport.ReportApiServer.Controllers
 				return StatusCode(StatusCodes.Status400BadRequest,ex.ToString());
 			}
 		}
+		[HttpGet]
+		[Route("GetCurrentBalance")]
+		public async Task<object> GetCurrentBalance(string mphone)
+		{
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					ApiInfo apiInfo = new ApiInfo();
+					dynamic apiResponse = null;
+					using (var response = await httpClient.GetAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/Kyc/GetCurrentBalance?mphone=" + mphone))
+					{
+						apiResponse = await response.Content.ReadAsAsync<dynamic>();
+
+					}
+					return apiResponse;
+				}
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(StatusCodes.Status400BadRequest, ex.ToString());
+			}
+		}
+		[HttpGet]
+		[Route("GetComissionBalance")]
+		public async Task<object> GetComissionBalance(string mphone)
+		{
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					ApiInfo apiInfo = new ApiInfo();
+					dynamic apiResponse = null;
+					using (var response = await httpClient.GetAsync(apiInfo.Ip + apiInfo.ReportApiServer + "/Kyc/GetComissionBalance?mphone=" + mphone))
+					{
+						apiResponse = await response.Content.ReadAsAsync<dynamic>();
+
+					}
+					return apiResponse;
+				}
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(StatusCodes.Status400BadRequest, ex.ToString());
+			}
+		}
 	}
 }

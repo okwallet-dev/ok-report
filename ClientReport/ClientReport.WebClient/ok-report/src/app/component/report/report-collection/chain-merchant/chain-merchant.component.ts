@@ -48,6 +48,7 @@ export class ChainMerchantComponent implements OnInit {
 
 
   ngOnInit() {
+    this.model.ReportName = 'Chain Merchant Transaction Report';
     this.typeList = [
       { label: 'Outlet Details Transaction Report', value: 'ODTR' },
       { label: 'Outlet Summary Transaction Report', value: 'OSTR' },
@@ -109,9 +110,10 @@ export class ChainMerchantComponent implements OnInit {
           .subscribe(
             data => {
               if (data !== 'NOTM') {
+                var today = new Date();
                 this.pdf.source = data;
                 this.pdf.ext = this.reportObject.fileType;
-                this.pdf.fileName = 'Account Statement';
+                this.pdf.fileName = 'Account Statement' + today;
                 this.isLoading = false;
                 this.pdfViewer.refreshReport();
               }
@@ -135,6 +137,9 @@ export class ChainMerchantComponent implements OnInit {
     else {
       return true;
     }
+  }
+  cancel() {
+    window.history.back();
   }
 
 }

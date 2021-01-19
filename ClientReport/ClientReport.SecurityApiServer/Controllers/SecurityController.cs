@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using ClientReport.SecurityService.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -37,15 +38,19 @@ namespace ClientReport.SecurityApiServer.Controllers
 					using (var response = await httpClient.PostAsJsonAsync(apiInfo.Ip + apiInfo.SecurityApiServer + "/Security/ClientLogIn", model))
 					{
 						authClientUser = await response.Content.ReadAsAsync<AuthClientUser>();
-						authClientUser.BearerToken = CreateJwtTokenForClient(authClientUser);
+						if (authClientUser.IsAuthenticated)
+						{
+							authClientUser.BearerToken = CreateJwtTokenForClient(authClientUser);
+						}
+						
 						return StatusCode(StatusCodes.Status200OK, authClientUser);
 
 					}
-				}
+				}				
 			}
 			catch (Exception ex)
 			{
-				return StatusCode(StatusCodes.Status401Unauthorized);
+				return StatusCode(StatusCodes.Status401Unauthorized, ex.ToString());
 			}
 
 		}

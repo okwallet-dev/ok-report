@@ -9,7 +9,25 @@ import { MfsSettingService } from '../mfs-setting.service';
   providedIn: 'root'
 })
 export class ReportServiceService {
-   
+  
+  getDistPortalInfo(mobileNo: any) {
+    return this.http.get<any>(this.settings.reportApiServer + '/DistributorPortal/getDistPortalInfo?mphone=' + mobileNo)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+  getCurrentBalance(mobileNo: any) {
+    return this.http.get<any>(this.settings.reportApiServer + '/Kyc/getCurrentBalance?mphone=' + mobileNo)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+  getComissionBalance(mobileNo: any) {
+    return this.http.get<any>(this.settings.reportApiServer + '/Kyc/getComissionBalance?mphone=' + mobileNo)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
   constructor(private http: HttpClient, private settings: MfsSettingService) { }
 
   getMerchantKycInfoByMphone(mobileNo : string) {

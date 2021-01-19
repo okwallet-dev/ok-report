@@ -85,6 +85,11 @@ import { MfsPdfViewerComponent } from './shared/directives/mfs-pdf-viewer/mfs-pd
 import { LoaderComponent } from './shared/directives/loader/loader.component';
 import { ChidMerchantComponent } from './component/report/report-collection/chid-merchant/chid-merchant.component';
 import { ChainMerchantComponent } from './component/report/report-collection/chain-merchant/chain-merchant.component';
+import { PathaoDashComponent } from './component/report/report-collection/pathao-dash/pathao-dash.component';
+import { AgentDsrListComponent } from './component/report/report-collection/dist-portal/agent-dsr-list/agent-dsr-list.component';
+import { BlncRptComponent } from './component/report/report-collection/dist-portal/blnc-rpt/blnc-rpt.component';
+import { CustRegComponent } from './component/report/report-collection/dist-portal/cust-reg/cust-reg.component';
+import { DpsDetailsComponent } from './component/report/report-collection/lanka/dps-details/dps-details.component';
 
 
 @NgModule({
@@ -114,7 +119,12 @@ import { ChainMerchantComponent } from './component/report/report-collection/cha
     StatusCheckPipe,
     YesNoPipe,
     ChidMerchantComponent,
-    ChainMerchantComponent
+    ChainMerchantComponent,
+    PathaoDashComponent,
+    AgentDsrListComponent,
+    BlncRptComponent,
+    CustRegComponent,
+    DpsDetailsComponent
   ],
   imports: [
     BrowserModule,

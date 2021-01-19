@@ -47,6 +47,7 @@ export class MerchantReportComponent implements OnInit {
 
 
   ngOnInit() {
+    this.model.ReportName = 'Individual Merchant Transaction Report';
     this.typeList = [
       { label: 'Transaction Report', value: 'TR' },
       { label: 'Summary Report', value: 'SM' }    
@@ -126,5 +127,8 @@ export class MerchantReportComponent implements OnInit {
     else {
       return true;
     }
+  }
+  cancel() {
+    window.history.back();
   }
 }

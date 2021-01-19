@@ -49,7 +49,7 @@ export class ChidMerchantComponent implements OnInit {
 
 
   ngOnInit() {
-    //this.getMerchantInfo();
+    this.model.ReportName = 'Child Merchant Transaction Report';
     this.typeList = [
       { label: 'Outlet Details Transaction Report', value: 'ODTR' },
       { label: 'Outlet Summary Transaction Report', value: 'OSTR' },
@@ -87,10 +87,7 @@ export class ChidMerchantComponent implements OnInit {
       var obj: any = {};
       obj.fromDate = this.mfsUtilityService.renderDate(this.model.fromDate, true);
       obj.toDate = this.mfsUtilityService.renderDate(this.model.toDate, true);
-      obj.mphone = this.model.mphone;
-      //obj.selectedReportType = this.model.selectedReportType;
-      //obj.reportType = this.model.selectedReportType;
-      //obj.reportViewType = this.model.selectedReportTypeOption;
+      obj.mphone = this.model.mphone;      
       obj.dateType = this.model.selectedDateType;
       this.reportObject.reportOption = JSON.stringify(obj);
       return true;
@@ -118,8 +115,9 @@ export class ChidMerchantComponent implements OnInit {
             data => {
               if (data !== 'NOTM') {
                 this.pdf.source = data;
+                var today = new Date();
                 this.pdf.ext = this.reportObject.fileType;
-                this.pdf.fileName = 'Account Statement';
+                this.pdf.fileName = 'Account Statement' + today;
                 this.isLoading = false;
                 this.pdfViewer.refreshReport();
               }
@@ -141,7 +139,8 @@ export class ChidMerchantComponent implements OnInit {
               if (data !== 'NOTM') {
                 this.pdf.source = data;
                 this.pdf.ext = this.reportObject.fileType;
-                this.pdf.fileName = 'Account Statement';
+                var today = new Date();
+                this.pdf.fileName = 'Account Statement' + today;
                 this.isLoading = false;
                 this.pdfViewer.refreshReport();
               }
@@ -163,7 +162,8 @@ export class ChidMerchantComponent implements OnInit {
               if (data !== 'NOTM') {
                 this.pdf.source = data;
                 this.pdf.ext = this.reportObject.fileType;
-                this.pdf.fileName = 'Account Statement';
+                var today = new Date();
+                this.pdf.fileName = 'Account Statement' + today;
                 this.isLoading = false;
                 this.pdfViewer.refreshReport();
               }
@@ -184,8 +184,9 @@ export class ChidMerchantComponent implements OnInit {
             data => {
               if (data !== 'NOTM') {
                 this.pdf.source = data;
+                var today = new Date();
                 this.pdf.ext = this.reportObject.fileType;
-                this.pdf.fileName = 'Account Statement';
+                this.pdf.fileName = 'Account Statement' + today;
                 this.isLoading = false;
                 this.pdfViewer.refreshReport();
               }
@@ -211,5 +212,7 @@ export class ChidMerchantComponent implements OnInit {
       return true;
     }
   }
-
+  cancel() {
+    window.history.back();
+  }
 }

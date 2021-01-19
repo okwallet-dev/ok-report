@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OneMFS.SharedResources;
 using System.Text;
-
+using Microsoft.AspNetCore.Server.IISIntegration;
 
 namespace ClientReport.ReportApiServer
 {
@@ -30,11 +30,13 @@ namespace ClientReport.ReportApiServer
 		{
 			JwtModel model = GetJwtSettings();
 
-			services.AddAuthentication(options => {
+			services.AddAuthentication(options =>
+			{
 				options.DefaultAuthenticateScheme = "JwtBearer";
 				options.DefaultChallengeScheme = "JwtBearer";
 			})
-			.AddJwtBearer("JwtBearer", jwtBearerOptions => {
+			.AddJwtBearer("JwtBearer", jwtBearerOptions =>
+			{
 				jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
 				{
 					ValidateIssuerSigningKey = true,
@@ -50,7 +52,9 @@ namespace ClientReport.ReportApiServer
 					ClockSkew = TimeSpan.FromMinutes(model.MinutesToExpiration)
 				};
 			});
+			services.AddSingleton<JwtModel>(model);
 			services.AddCors();
+			services.AddAuthentication(IISDefaults.AuthenticationScheme);
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}
 
@@ -61,6 +65,11 @@ namespace ClientReport.ReportApiServer
 			{
 				app.UseDeveloperExceptionPage();
 			}
+
+			app.UseCors(builder => builder
+			 .AllowAnyOrigin()
+			 .AllowAnyMethod()
+			 .AllowAnyHeader());
 			app.UseAuthentication();
 			app.UseMvc();
 		}

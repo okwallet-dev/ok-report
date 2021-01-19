@@ -1,12 +1,123 @@
-<div class="p-grid">
-  <div class="p-col-6">
+<div class="p-grid" *ngIf="!isLoading">
+  <div class="p-col-6" *ngIf="isMasterWallet || isMerchant">
     <p-card>
       <div class="p-grid">
         <div class="p-col-5">
           <h5 style="color:cadetblue">Company Name</h5>
         </div>
         <div class="p-col-5">
-          <h6 style="color:blue"><b>{{dashboardModel.companyName}}</b></h6>
+          <h5 style="color:blue"><b>{{dashboardModel.companyName}}</b></h5>
+        </div>
+        <div class="p-col-2">
+          <h6 style="float:right"><i class="fa fa-building"></i></h6>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  <div class="p-col-6" *ngIf="isMasterWallet">
+    <p-card>
+      <div class="p-grid">
+        <div class="p-col-5">
+          <h5 style="color:cadetblue">Balance</h5>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:blue"><b>{{dashboardModel.balance}}</b></h5>
+        </div>
+        <div class="p-col-2">
+          <h6 style="float:right"><i class="fa fa-building"></i></h6>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  <div class="p-col-4" *ngIf="isDistributor">
+    <p-card>
+      <div class="p-grid">
+        <div class="p-col-5">
+          <h5 style="color:cadetblue">Distributor Name</h5>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:blue"><b>{{dashboardModel.companyName}}</b></h5>
+        </div>
+        <div class="p-col-2">
+          <h6 style="float:right"><i class="fa fa-building"></i></h6>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:cadetblue">Main Balance </h5>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:blue"><b>{{dashboardModel.balance}}</b></h5>
+        </div>
+        <div class="p-col-2">
+          <h6 style="float:right"><i class="fa fa-building"></i></h6>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:cadetblue">Commission  Balance </h5>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:blue"><b>{{dashboardModel.comBalance}}</b></h5>
+        </div>
+        <div class="p-col-2">
+          <h6 style="float:right"><i class="fa fa-building"></i></h6>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  <div class="p-col-4" *ngIf="isDistributor">
+    <p-card>
+      <div class="p-grid">
+        <div class="p-col-5">
+          <h5 style="color:cadetblue">Total DSR</h5>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:blue"><b>{{dashboardModel.DsrCount}}</b></h5>
+        </div>
+        <div class="p-col-2">
+          <h6 style="float:right"><i class="fa fa-building"></i></h6>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:cadetblue">Total DSR Balance</h5>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:blue"><b>{{dashboardModel.DsrBalance}}</b></h5>
+        </div>
+        <div class="p-col-2">
+          <h6 style="float:right"><i class="fa fa-building"></i></h6>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  <div class="p-col-4" *ngIf="isDistributor">
+    <p-card>
+      <div class="p-grid">
+        <div class="p-col-5">
+          <h5 style="color:cadetblue">Total Agent</h5>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:blue"><b>{{dashboardModel.AgentCount}}</b></h5>
+        </div>
+        <div class="p-col-2">
+          <h6 style="float:right"><i class="fa fa-building"></i></h6>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:cadetblue">Total Agent Balance</h5>
+        </div>
+        <div class="p-col-5">
+          <h5 style="color:blue"><b>{{dashboardModel.AgentBalance}}</b></h5>
+        </div>
+        <div class="p-col-2">
+          <h6 style="float:right"><i class="fa fa-building"></i></h6>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  <div class="p-col-4" *ngIf="isDistributor">
+    <p-card>
+      <div class="p-grid">
+        <div class="p-col-5">
+          <h5 style="color:cadetblue">Balance Information</h5>
+        </div>
+        <div class="p-col-5">
+          <button type="button" (click)="openModal('blnc-rpt')" pButton icon="pi pi-info-circle" label="Show Balance"></button>
         </div>
         <div class="p-col-2">
           <h6 style="float:right"><i class="fa fa-building"></i></h6>
@@ -15,3 +126,8 @@
     </p-card>
   </div>
 </div>
+<app-generic-modal [initiateModal]="showBalanceModal" [header]="'Balance Information'" [hideConfirm]="true" (onDestroy)="showBalanceModal=false">
+  <app-blnc-rpt></app-blnc-rpt>
+</app-generic-modal>
+<mfs-loader *ngIf="isLoading"></mfs-loader>
+

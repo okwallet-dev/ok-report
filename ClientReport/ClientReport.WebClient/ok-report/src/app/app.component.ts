@@ -17,15 +17,15 @@ import { Subject } from 'rxjs';
   animations: [
     trigger(
       'menu-annimation', [
-        transition(':enter', [
-          style({ transform: 'translateX(-120%)', opacity: 0.5 }),
-          animate('400ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
-        ]),
-        transition(':leave', [
-          style({ transform: 'translateX(0)', opacity: 1 }),
-          animate('100ms ease-out', style({ transform: 'translateX(-60%)', opacity: 0.6 }))
-        ])
-      ]
+      transition(':enter', [
+        style({ transform: 'translateX(-120%)', opacity: 0.5 }),
+        animate('400ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateX(0)', opacity: 1 }),
+        animate('100ms ease-out', style({ transform: 'translateX(-60%)', opacity: 0.6 }))
+      ])
+    ]
     )
   ],
   encapsulation: ViewEncapsulation.None,
@@ -78,42 +78,30 @@ export class AppComponent implements OnInit {
     });
   }
   ngOnInit() {
+    console.log('App Component');
     this.changePasswordModel = {};
-    if (this.currentUser.user.mtype === 'I') {
-      this.leftMenuItems = [
+    if (this.currentUser) {
+      this.leftMenuItems = this.mfsUtilityService.getLeftMenuItem(this.currentUser);
+      this.settingItems = [
         {
-          label: 'Report',
-          icon: 'fas fa-file-archive',
+          label: 'Settings',
+          icon: 'far fa-life-ring',
           items: [
-            { label: 'Transaction Report', icon: 'fa fa-file', routerLink: 'app-merchant-report' }
+            {
+              label: ' Change Password', icon: 'fas fa-key', command: (event) => {
+                this.firstTimeChange = false;
+                this.promptChangePassword();
+              }
+            },          
+            {
+              label: ' Sign Out ', icon: 'fas fa-sign-out-alt', command: (event) => {
+                this.logout();
+              }
+            },
           ]
         }
       ];
     }
-    else if (this.currentUser.user.mtype === 'CP') {
-      this.leftMenuItems = [
-        {
-          label: 'Report',
-          icon: 'fas fa-file-archive',
-          items: [
-            { label: 'Chain Merchant Report', icon: 'fa fa-file', routerLink: 'app-chain-merchant' }
-          ]
-        }
-      ];
-    }
-    else if (this.currentUser.user.mtype === 'CM') {
-      this.leftMenuItems = [
-        {
-          label: 'Report',
-          icon: 'fas fa-file-archive',
-          items: [
-            { label: 'Child Merchant Report', icon: 'fa fa-file', routerLink: 'app-chid-merchant' }
-          ]
-        }
-      ];
-
-    }
-
   }
   logout() {
     this.leftMenuItems = [];

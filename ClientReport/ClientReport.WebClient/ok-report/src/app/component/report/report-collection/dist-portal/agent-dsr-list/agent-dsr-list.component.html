@@ -1,0 +1,30 @@
+<mfs-pdf-viewer [src]="pdf" #mfsPdfViewer></mfs-pdf-viewer>
+<div class="p-col-12">
+  <hr />
+</div>
+<div class="p-col-12">
+  <p-card>
+    <div class="p-grid">
+      <div class="p-col-2">
+        <button class="btn btn-danger btn-reverse btn-sm btn-block" (click)="cancel()"><i class="fas fa-caret-left"></i> Back</button>
+      </div>
+      <div class="p-col-7">
+        <h5 style="text-align:center">{{model.ReportName}}</h5>
+      </div>
+      <div class="p-col-3">
+        <p-selectButton [options]="fileOptionList" [(ngModel)]="reportObject.fileType"></p-selectButton>
+      </div>
+      <div class="p-col-12">
+        <hr />
+      </div>    
+      <div class="p-col-12">
+        <hr />
+      </div>
+      <div class="p-col-12">
+        <button type="button" class="btn btn-blue btn-sm btn-reverse btn-block" (click)="generateReport()">Generate Report <i class="fas fa-download"></i></button>
+      </div>
+    </div>
+  </p-card>
+</div>
+<mfs-loader *ngIf="isLoading"></mfs-loader>
+

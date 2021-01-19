@@ -23,7 +23,7 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(loginModel) {
+  login(loginModel) {   
     return this.http.post<any>(this.setting.securityApiServer + '/Security/Login', loginModel)
       .pipe(map(user => {
         if (user && user.bearerToken && user.isAuthenticated) {
@@ -91,23 +91,15 @@ export class AuthenticationService {
     return false;
   }
 
-  checkRegisterPermissionAccess(targetRoute) {
-    var statePermission = this.getCurrentStatePermission(targetRoute);
+  //checkRegisterPermissionAccess(targetRoute) {
+  //  var statePermission = this.getCurrentStatePermission(targetRoute);
 
-    if (statePermission) {
-      if (statePermission.ISREGISTRATIONPERMITTED == 1) {
-        return true;
-      }
-    }
+  //  if (statePermission) {
+  //    if (statePermission.ISREGISTRATIONPERMITTED == 1) {
+  //      return true;
+  //    }
+  //  }
 
-    return false;
-  }
-
-
-  getGlobalSearchResult(model: any): any {
-    return this.http.get<any>(this.setting.clientApiServer + '/Dashboard/GetGlobalSearchResult?option=' + model.option + '&criteria=' + model.criteria + '&filter=' + model.filter)
-      .pipe(map(model => {
-        return model;
-      }));
-  }
+  //  return false;
+  //}
 }

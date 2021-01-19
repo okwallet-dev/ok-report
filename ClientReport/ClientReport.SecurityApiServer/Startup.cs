@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,11 +30,13 @@ namespace ClientReport.SecurityApiServer
 		{
 			JwtModel model = GetJwtSettings();
 
-			services.AddAuthentication(options => {
+			services.AddAuthentication(options =>
+			{
 				options.DefaultAuthenticateScheme = "JwtBearer";
 				options.DefaultChallengeScheme = "JwtBearer";
 			})
-			.AddJwtBearer("JwtBearer", jwtBearerOptions => {
+			.AddJwtBearer("JwtBearer", jwtBearerOptions =>
+			{
 				jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
 				{
 					ValidateIssuerSigningKey = true,
@@ -51,6 +54,7 @@ namespace ClientReport.SecurityApiServer
 			});
 			services.AddSingleton<JwtModel>(model);
 			services.AddCors();
+			services.AddAuthentication(IISDefaults.AuthenticationScheme);
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}
 
@@ -61,6 +65,10 @@ namespace ClientReport.SecurityApiServer
 			{
 				app.UseDeveloperExceptionPage();
 			}
+			app.UseCors(builder => builder
+			 .AllowAnyOrigin()
+			 .AllowAnyMethod()
+			 .AllowAnyHeader());
 			app.UseAuthentication();
 			app.UseMvc();
 		}

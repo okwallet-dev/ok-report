@@ -1,5 +1,5 @@
 <p-table #dt [columns]="gridConfig.columnList" [value]="gridConfig.dataSource" [paginator]="gridConfig.showPaginator" [rows]="gridConfig.row"
-         [reorderableColumns]="gridConfig.reorderableColumns" columnResizeMode="expand" [responsive]="true"
+         [reorderableColumns]="gridConfig.reorderableColumns" columnResizeMode="expand" [responsive]="true" [exportFilename]="gridConfig.reportName"
          [scrollable]="true" [scrollHeight]="gridConfig.scrollHeight" [resizableColumns]="gridConfig.resizableColumns" [loading]="isLoading">
     <ng-template pTemplate="colgroup" let-columns>
         <colgroup>
@@ -123,9 +123,9 @@
             <div class="col-8">
                 <div style="float:right">
                     <div class="btn-group edit-group" role="group" aria-label="Basic example">
-                        <button class="btn btn-outline-success btn-sm" (click)="updateDataSource()" *ngIf="gridConfig.autoUpdateDataSource" data-toggle="tooltip" data-placement="top" title="Refresh"><i class="fas fa-sync"></i></button>
-                        <button class="btn btn-outline-success btn-sm" (click)="dt.exportCSV()" *ngIf="gridConfig.showExport" data-toggle="tooltip" data-placement="top" title="Export to CSV"><i class="fas fa-file-download"></i></button>
-                        <button class="btn btn-outline-success btn-sm" (click)="exportToPDF()" *ngIf="gridConfig.showExport" data-toggle="tooltip" data-placement="top" title="Export to PDF"><i class="fas fa-file-pdf"></i></button>
+                        <button class="btn btn-outline-success btn-sm" (click)="updateDataSource()"  *ngIf="gridConfig.autoUpdateDataSource" data-toggle="tooltip" data-placement="top" title="Refresh"><i class="fas fa-sync"></i></button>
+                        <button class="btn btn-outline-success btn-sm" (click)="dt.exportCSV()"  *ngIf="gridConfig.showExport" data-toggle="tooltip" data-placement="top" title="Export to CSV"><i class="fas fa-file-download"></i></button>
+                        <!--<button class="btn btn-outline-success btn-sm" (click)="exportToPDF()" *ngIf="gridConfig.showExport" data-toggle="tooltip" data-placement="top" title="Export to PDF"><i class="fas fa-file-pdf"></i></button>-->
                     </div>
                     <div class="btn-group edit-group" role="group" aria-label="Basic example">
                         <button class="btn btn-outline-success btn-sm" (click)="onBatchSwitchBoxEditSave()" *ngIf="gridConfig.isBatchSwitchBoxEdit" [disabled]="itemsToEdit.length==0" data-toggle="tooltip" data-placement="right" title="Update Batch">Save <i class="fas fa-save" aria-hidden="true"></i></button>

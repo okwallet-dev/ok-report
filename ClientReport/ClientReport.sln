@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiServers", "ApiServers", "{CC14EBF2-7309-4F70-8821-9B6FE31DBA5D}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientReport.ReportApiServe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientReport.WebClient", "ClientReport.WebClient\ClientReport.WebClient.csproj", "{374938EF-C87E-4B5F-873F-22E1C800D976}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientReport.SecurityService", "ClientReport.SecurityService\ClientReport.SecurityService.csproj", "{4772A430-61EA-4EC2-B435-EAEE56E6CB86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientReport.SecurityService", "ClientReport.SecurityService\ClientReport.SecurityService.csproj", "{4772A430-61EA-4EC2-B435-EAEE56E6CB86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,5 +54,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07DBCFF4-23DE-47CA-8CFC-F4CC4EDADD9D}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN2019 - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

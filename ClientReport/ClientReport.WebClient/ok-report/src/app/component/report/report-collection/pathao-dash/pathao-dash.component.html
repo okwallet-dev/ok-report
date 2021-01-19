@@ -1,0 +1,62 @@
+<mfs-pdf-viewer [src]="pdf" #mfsPdfViewer></mfs-pdf-viewer>
+<div class="p-col-12">
+  <hr />
+</div>
+<div class="p-col-12">
+  <p-card>
+    <div class="p-grid">
+      <div class="p-col-2">
+        <button class="btn btn-danger btn-reverse btn-sm btn-block" (click)="cancel()"><i class="fas fa-caret-left"></i> Back</button>
+      </div>
+      <div class="p-col-7">
+        <h5 style="text-align:center">{{model.ReportName}}</h5>
+      </div>
+      <div class="p-col-3">
+        <p-selectButton [options]="fileOptionList" [(ngModel)]="reportObject.fileType"></p-selectButton>
+      </div>
+      <div class="p-col-12">
+        <hr />
+      </div>
+      <div class="p-col-6">
+        <label for="float-input input-lg" class="col-form-label">Transaction No</label>
+        <input autocomplete="off" type="text" class="form-control form-input" (change)="disabledDatepicker()" [(ngModel)]="model.transNo" pInputText />
+      </div>
+      <div class="p-col-6">
+        
+      </div>
+      <div class="p-col-6">
+        <div class="input-group">
+          <input class="form-control" pInputText placeholder="From" placement="bottom"
+                 name="dp1" [readonly]="true" [disabled]="isTransNoExist" [(ngModel)]="model.fromDate" ngbDatepicker #e="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="fa fa-calendar btn btn-blue btn-sm btn-reverse btn-block" (click)="e.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="input-group">
+          <input class="form-control" pInputText placeholder="To" placement="bottom" [disabled]="isTransNoExist"
+                 name="dp2" [readonly]="true" [(ngModel)]="model.toDate" ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="fa fa-calendar btn btn-blue btn-sm btn-reverse btn-block" (click)="d.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="p-col-12">
+        <span class="ui-float-label ">
+          <input id="float-input" type="text" [disabled]="true" class="form-control" pInputText [(ngModel)]="model.mphone">
+          <label for="float-input input-lg"><i class='fa fa-search'></i>Account Number <span class="mandatory">*</span></label>
+        </span>
+      </div>
+      <div class="p-col-12">
+        <hr />
+      </div>
+      <div class="p-col-12">
+        <button type="button" class="btn btn-blue btn-sm btn-reverse btn-block" (click)="generateReport()">Generate Report <i class="fas fa-download"></i></button>
+      </div>
+    </div>
+  </p-card>
+</div>
+<mfs-loader *ngIf="isLoading"></mfs-loader>
+
